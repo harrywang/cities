@@ -134,12 +134,19 @@ export function TemperatureChart({ cities, unit, onUnitChange }: TemperatureChar
             />
             <Legend
               wrapperStyle={{ fontSize: "12px", paddingTop: "10px" }}
-              payload={cities.map((city, index) => ({
-                value: city.city,
-                type: "line" as const,
-                id: city.city,
-                color: COLORS[index % COLORS.length],
-              }))}
+              content={() => (
+                <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 pt-2">
+                  {cities.map((city, index) => (
+                    <div key={city.city} className="flex items-center gap-1">
+                      <div
+                        className="w-3 h-[2px]"
+                        style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                      />
+                      <span className="text-xs">{city.city}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             />
             {cities.map((city, index) => (
               <Line
