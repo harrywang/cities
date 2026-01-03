@@ -134,11 +134,12 @@ export function TemperatureChart({ cities, unit, onUnitChange }: TemperatureChar
             />
             <Legend
               wrapperStyle={{ fontSize: "12px", paddingTop: "10px" }}
-              formatter={(value) => {
-                // Shorten legend text on display
-                const city = cities.find(c => `${c.city}, ${c.country}` === value);
-                return city ? city.city : value;
-              }}
+              payload={cities.map((city, index) => ({
+                value: city.city,
+                type: "line" as const,
+                id: city.city,
+                color: COLORS[index % COLORS.length],
+              }))}
             />
             {cities.map((city, index) => (
               <Line
