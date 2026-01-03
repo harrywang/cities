@@ -124,13 +124,21 @@ export function TemperatureChart({ cities, unit, onUnitChange }: TemperatureChar
               width={50}
             />
             <Tooltip
-              contentStyle={{
-                backgroundColor: "#fff",
-                border: "1px solid #e5e7eb",
-                borderRadius: "8px",
-                fontSize: "12px",
+              content={({ active, payload, label }) => {
+                if (!active || !payload?.length) return null;
+                const sorted = [...payload].sort((a, b) => (b.value as number) - (a.value as number));
+                return (
+                  <div className="bg-white border border-gray-200 rounded-lg p-2 text-xs">
+                    <div className="font-medium mb-1">{label}</div>
+                    {sorted.map((entry) => (
+                      <div key={entry.dataKey} className="flex items-center gap-2">
+                        <span style={{ color: entry.color }}>{entry.name?.split(",")[0]}</span>
+                        <span>: {entry.value}°{unit}</span>
+                      </div>
+                    ))}
+                  </div>
+                );
               }}
-              formatter={(value) => [`${value}°${unit}`, ""]}
             />
             <Legend
               wrapperStyle={{ fontSize: "12px", paddingTop: "10px" }}
