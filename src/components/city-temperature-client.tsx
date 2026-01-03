@@ -17,7 +17,7 @@ interface CityTemperatureClientProps {
 
 export function CityTemperatureClient({ citiesData }: CityTemperatureClientProps) {
   const [selectedCities, setSelectedCities] = useState<string[]>([
-    "New York City",
+    "New York",
     "Shanghai",
     "Paris",
     "Sydney",
@@ -65,7 +65,7 @@ export function CityTemperatureClient({ citiesData }: CityTemperatureClientProps
           <h2 className="text-sm sm:text-base font-medium text-muted-foreground">Add Cities</h2>
           <div className="flex items-center gap-3">
             <button
-              onClick={() => setSelectedCities(["New York City", "Shanghai", "Paris", "Sydney"])}
+              onClick={() => setSelectedCities(["New York", "Shanghai", "Paris", "Sydney"])}
               className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Sample

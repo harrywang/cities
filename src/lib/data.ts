@@ -21,33 +21,34 @@ export interface CityTemperature {
 }
 
 export async function getCityTemperatures(): Promise<CityTemperature[]> {
-  const filePath = path.join(process.cwd(), "city_temperatures.csv");
+  const filePath = path.join(process.cwd(), "cities.csv");
   const fileContent = await fs.readFile(filePath, "utf-8");
 
   const lines = fileContent.trim().split("\n");
   const data: CityTemperature[] = [];
 
   // Skip header row
+  // cities.csv columns: Continent,Country,City,lat,lng,iso2,iso3,admin_name,capital,population,id,Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,Year
   for (let i = 1; i < lines.length; i++) {
     const values = lines[i].split(",");
-    if (values.length >= 15) {
+    if (values.length >= 23) {
       data.push({
         continent: values[0],
         country: values[1],
         city: values[2],
-        jan: parseFloat(values[3]),
-        feb: parseFloat(values[4]),
-        mar: parseFloat(values[5]),
-        apr: parseFloat(values[6]),
-        may: parseFloat(values[7]),
-        jun: parseFloat(values[8]),
-        jul: parseFloat(values[9]),
-        aug: parseFloat(values[10]),
-        sep: parseFloat(values[11]),
-        oct: parseFloat(values[12]),
-        nov: parseFloat(values[13]),
-        dec: parseFloat(values[14]),
-        year: parseFloat(values[15]),
+        jan: parseFloat(values[11]),
+        feb: parseFloat(values[12]),
+        mar: parseFloat(values[13]),
+        apr: parseFloat(values[14]),
+        may: parseFloat(values[15]),
+        jun: parseFloat(values[16]),
+        jul: parseFloat(values[17]),
+        aug: parseFloat(values[18]),
+        sep: parseFloat(values[19]),
+        oct: parseFloat(values[20]),
+        nov: parseFloat(values[21]),
+        dec: parseFloat(values[22]),
+        year: parseFloat(values[23]),
       });
     }
   }
